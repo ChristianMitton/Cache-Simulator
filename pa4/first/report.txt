@@ -1,0 +1,8 @@
+Christian Mitton
+pa4 Report
+
+I did the extra credit.
+
+The main data structures being used in my program are queues and arrays. The idea was to create an array, where each index would contain an empty queue, and this would be my cache. I scanned through the file twice, once for non-prefetch and again for prefetch. The index of an address, its block offset and its tag were all calculated through bit shifting. Whenever an address needed to be inserted into the cache, the program would go to the specific index for that address in my cache, and enqueue it to a queue. Depending on the associativity, if the number of blocks were full in the queue it would dequeue the oldest address  and enqueue the new address. In the case of LRU, it would dequeue the least recently used address when the number of blocks were full.
+
+For prefetch, I observed that the chances of having a hit increased and the number of memory reads also increased. Since my program was attempting to “guess” what would be in the queue for each address, each guess requires an extra read which explains the increase in memory reads. My program would check if the guessed address was already in the queue. If it was it would do nothing, and if it wasn't it would enqueue the guessed address into the cache (it would also hanlde the case where the block for the prefetched address was already full). This lowers the chance of misses, thereby increasing the chances of hits, which explains the increase in hits.
